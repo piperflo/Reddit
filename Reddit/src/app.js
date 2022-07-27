@@ -15,7 +15,7 @@ const createSession = require('./endpoints/create-session');
 const destroySession = require('./endpoints/destroy-session');
 const serveFeed = require('./endpoints/serve-feed.js');
 const postComment = require('./endpoints/post-comments.js');
-
+const createComment = require('./endpoints/create-comment');
 var app = express();
 
 app.use(loadSession);
@@ -33,6 +33,9 @@ app.post("/signin", loadBody, createSession);
 app.get("/signout", destroySession);
 
 app.get('/post-comments/:id', postComment);
+
+
+app.post("/post-comments/:id/comments", loadBody, createComment);
 
 app.get('/rss', serveFeed);
 app.use(express.static('public'));
