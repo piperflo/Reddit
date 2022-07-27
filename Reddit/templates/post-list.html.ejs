@@ -1,11 +1,14 @@
 <nav>
-    <h2>Posts</h2>
-    <ul>
-    <% posts.forEach(function(post){ %>
-      <li>
-        <a href="/posts/<%= post.id %>">
-          <%= post.title %>
-        </a>
-    <% }); %>
-    </ul>
-  </nav>
+  <ul>
+  <% posts.forEach(function(post){ %>
+    <li>
+        <div class="post-container">
+            <div>
+                <a class="posts" href="/post-comments/<%= post.id %>">
+                    <%= post.title %>
+                </a>
+            </div>
+        </div>
+  <% }); %>
+  </ul>
+</nav>

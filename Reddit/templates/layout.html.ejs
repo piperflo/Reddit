@@ -8,7 +8,6 @@
     <header>
         <div id="header">
         <% if(locals.user) { %>
-            Welcome <%= user.username %>!
             <% if(locals.user.role === "Author") { %>
             <a href="/posts/new">Create a Post</a>
             <% } %>
@@ -20,10 +19,20 @@
         <% } %>
         </div>
     </header>
-    <h1>My Blog</h1>
+    <h1>Welcome to Reddit</h1>
+    <div>
+        <% if(locals.user) { %>
+            Welcome <%= user.username %>!
+            <% if(locals.user.role === "Author") { %>
+            <a href="/posts/new">Create a Post</a>
+            <% } %>
+        <% } %>
+    </div>
     <div class="content">      
       <%- post %>  
-      <%- list %>  
+    </div>
+    <div>
+        <%- list %>  
     </div>
     <script src="/blog.js"></script>
   </body>

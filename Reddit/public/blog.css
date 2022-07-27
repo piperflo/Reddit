@@ -23,7 +23,15 @@ body {
     padding: 2rem;
     justify-content: space-around;
   }
-  
+  .post-container{
+    display: flex;
+    flex-direction: row;
+    min-width: 450px;
+    max-width: 700px;
+    background-color: white;
+    padding: 2rem;
+    justify-content: space-around;
+  }
   .content > article {
     flex-grow: 2;
     padding: 1rem;
@@ -45,10 +53,12 @@ body {
     color: white;
   }
   
-  
-
+  ul{
+    list-style-type: none;
+  }
 
   #header{
     flex: 100%;
     background-color: blue;
   }
+
