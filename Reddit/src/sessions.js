@@ -9,10 +9,6 @@ const SESSION_EXPIRATION_INTERVAL = 60 * 60 * 1000;
 
 var sessions = {};
 
-/** @function generateUUID
- * This function generates a new UUID, ensuring it isn't already in use
- * @returns {string} A UUID not already in use
- */
 function generateUUID() {
   var uuid = uuidv1();
   // Invariant: The current value of uuid is already in use 
@@ -29,12 +25,14 @@ function generateUUID() {
 function createSession(user) {
   var sid = generateUUID();  
   var role = db.prepare("SELECT name FROM roles WHERE id=?").get(user.role_id).name;
+  var auth = db.prepare("SELECT name FROM authority WHERE id=?").get(user.auth_id).name;
   sessions[sid] = {
     timestamp: Date.now(),
     user: {
       id: user.id,
       username: user.username,
-      role: role
+      role: role,
+      auth: auth
     },
     data: {}
   }

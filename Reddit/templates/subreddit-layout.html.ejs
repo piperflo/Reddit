@@ -23,7 +23,7 @@
     <div>
         <% if(locals.user) { %>
             Welcome <%= user.username %>!
-            <% if(locals.user.role === "Author") { %>
+            <% if(locals.user.auth === "Admin") { %>
             <a href="/create-subreddit">Create a Sub</a>
             <% } %>
         <% } %>
