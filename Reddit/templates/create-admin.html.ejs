@@ -1,0 +1,22 @@
+<!doctype HTML>
+<html>
+    <head>
+        <link type="text/css" rel="stylesheet" href="/reddit.css">
+    </head>
+    <body>
+    <div>
+        <h1>Please Pick a user to become a admin</h1>
+        <form method="POST" action="/create-admin/create">   
+            <input type="text" name="username" required/>
+            <input type="submit" value="username"/>
+
+        </form>                                                                                    
+        <ul>
+        <h3>List of users</h3>
+        <% users.forEach((user) => { %>
+            <li>
+            <%= user.username %>
+        <% }); %>
+        </ul>
+    </div>
+</body>

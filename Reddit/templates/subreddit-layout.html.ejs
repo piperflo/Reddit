@@ -25,6 +25,7 @@
             Welcome <%= user.username %>!
             <% if(locals.user.auth === "Admin") { %>
             <a href="/create-subreddit">Create a Sub</a>
+            <a href="/create-admin">Create a admin</a>
             <% } %>
         <% } %>
     </div>

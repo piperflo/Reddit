@@ -24,10 +24,12 @@ const subPost = require('./endpoints/subreddits/show-subreddit');
 const postHomepage = require('./endpoints/subreddits/subreddit-to-post');
 
 const createSub = require('./endpoints/subreddits/create-subreddits');
-const subForm = require('./endpoints/subreddits/subreddit-form');
+const subForm = require('./endpoints/subreddits/create-admin');
 
 const adminsOnly = require('./middleware/admins-only');
 
+const adminForm = require('./endpoints/subreddits/admin-form');
+const createAdmin = require('./endpoints/subreddits/create-admin');
 var app = express();
 
 app.use(loadSession);
@@ -35,7 +37,7 @@ app.use(loadSession);
 app.get('/', subPost);
 
 app.get('/r/:id/posts/new', authorsOnly, newPost);
-app.post('/r/:id/posts', authorsOnly, loadBody, createPost);
+app.post('/r/posts/:id/post', authorsOnly, loadBody, createPost);
 
 app.get('/posts/:id', showPost);
 
@@ -54,9 +56,12 @@ app.get('/r/:id', postHomepage);
 app.post("/post-comments/:id/comments", loadBody, createComment);
 
 app.get("/create-subreddit", adminsOnly, subForm);
-app.post("/create-subreddit/create", loadBody, createSub);
+//Added t
+app.post("/create-subreddit/create", authorsOnly, loadBody, createSub);
 
+app.get("/create-admin", adminForm);
 
+app.post("/create-admin/create", adminsOnly, loadBody, createAdmin);
 
 
 app.get('/rss', serveFeed);

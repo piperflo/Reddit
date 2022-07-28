@@ -24,7 +24,10 @@ function createPost(req, res) {
     if(info.changes !== 1) return serveError(req, res, 500, "Unable to write to database");
     
     // Redirect to the read page for the post
-    res.writeHead(302, {"Location": `posts/${info.lastInsertRowid}`}).end();
+    //res.writeHead(302, {"Location": `/r/${id}/posts`}).end();
+    res.statusCode = 302;
+    res.setHeader("Location", `/r/${id}`);
+    res.end();
 }
 
 module.exports = createPost;
