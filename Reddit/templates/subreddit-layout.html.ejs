@@ -24,7 +24,7 @@
         <% if(locals.user) { %>
             Welcome <%= user.username %>!
             <% if(locals.user.role === "Author") { %>
-            <a href="/r/new-subreddit">Create a Sub</a>
+            <a href="/create-subreddit">Create a Sub</a>
             <% } %>
         <% } %>
     </div>

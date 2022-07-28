@@ -6,19 +6,19 @@ const serveError = require('../serve-error');
  * Creates a new post using the supplied form data
  */
 function createSub(req, res) {
-    var comment = req.body.comment;
+    var sub = req.body.sub;
 
-    var id = parseInt(req.params.id, 10);
+    var date = new Date().valueOf();
+
+    sub = sanitizeHTML(sub);
   
-    comment = sanitizeHTML(comment);
-  
-    var info = db.prepare(`INSERT INTO comments (text, posts_id) VALUES (?, ?)`).run(comment, id);
+    var info = db.prepare(`INSERT INTO subreddits (name, date) VALUES (?, ?)`).run(sub, date);
     
     if(info.changes !== 1) return serveError(req, res, 500, "Unable to write to database");
     
   
     res.statusCode = 302;
-    res.setHeader("Location", `/post-comments/${id}`);
+    res.setHeader("Location", `/`);
     res.end();
 }
 

@@ -22,6 +22,9 @@ const createComment = require('./endpoints/comments/create-comment');
 
 const subPost = require('./endpoints/subreddits/show-subreddit');
 const postHomepage = require('./endpoints/subreddits/subreddit-to-post');
+
+const createSub = require('./endpoints/subreddits/create-subreddits');
+const subForm = require('./endpoints/subreddits/subreddit-form');
 var app = express();
 
 app.use(loadSession);
@@ -46,6 +49,8 @@ app.get('/post-comments/:id', postComment);
 app.get('/r/:id', postHomepage);
 
 app.post("/post-comments/:id/comments", loadBody, createComment);
+
+app.get("/create-subreddit", subForm);
 
 app.get('/rss', serveFeed);
 app.use(express.static('public'));
