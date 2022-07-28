@@ -1,0 +1,15 @@
+<nav>
+    <ul>
+    <% subreddits.forEach(function(sub){ %>
+      <li>
+          <div class="sub-container">
+              <div>
+                  <a class="subs" href="/r/<%= sub.id %>">
+                    <h1>This is to test that we are using subreddit-list</h1>
+                      <%= sub.name %>
+                  </a>
+              </div>
+          </div>
+    <% }); %>
+    </ul>
+  </nav>

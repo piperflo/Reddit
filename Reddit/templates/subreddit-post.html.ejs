@@ -1,7 +1,7 @@
 <!doctype HTML>
 <html>
   <head>
-    <title> <%= title %></title>
+    <title> <%= sub.name %></title>
     <link type="text/css" rel="stylesheet" href="/reddit.css">
   </head>
   <body>
@@ -19,7 +19,7 @@
         <% } %>
         </div>
     </header>
-    <h1>Welcome to Reddit</h1>
+    <h1><%= sub.name %></h1>
     <div>
         <% if(locals.user) { %>
             Welcome <%= user.username %>!
@@ -27,9 +27,6 @@
             <a href="/r/<%= sub.id %>/posts/new">Create a Post</a>
             <% } %>
         <% } %>
-    </div>
-    <div class="content">      
-      <%- post %>  
     </div>
     <div>
         <%- list %>  

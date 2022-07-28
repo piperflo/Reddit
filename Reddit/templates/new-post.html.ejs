@@ -1,7 +1,7 @@
 <div>
   
     <h2>New Reddit Post</h2>
-    <form method="POST" action="/posts">
+    <form method="POST" action="/r/<%= sub.id %>/posts">
   
       <label>Title</label>
       <input type="text" name="title" required/>

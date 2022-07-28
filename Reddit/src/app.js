@@ -1,8 +1,5 @@
 const express = require('express');
 const serveHomepage = require('./endpoints/serve-homepage');
-const newPost = require('./endpoints/new-post');
-const createPost = require('./endpoints/create-post');
-const showPost = require('./endpoints/show-post');
 const loadBody = require('./middleware/load-body');
 const loadSession = require('./middleware/load-session');
 const authorsOnly = require('./middleware/authors-only');
@@ -14,18 +11,29 @@ const createUser = require('./endpoints/create-user');
 const createSession = require('./endpoints/create-session');
 const destroySession = require('./endpoints/destroy-session');
 const serveFeed = require('./endpoints/serve-feed.js');
-const postComment = require('./endpoints/post-comments.js');
-const createComment = require('./endpoints/create-comment');
+
+
+const newPost = require('./endpoints/posts/new-post');
+const createPost = require('./endpoints/posts/create-post');
+const showPost = require('./endpoints/posts/show-post');
+const postComment = require('./endpoints/posts/post-comments.js');
+
+const createComment = require('./endpoints/comments/create-comment');
+
+const subPost = require('./endpoints/subreddits/show-subreddit');
+const postHomepage = require('./endpoints/subreddits/subreddit-to-post');
 var app = express();
 
 app.use(loadSession);
 
-app.get('/', serveHomepage);
+app.get('/', subPost);
 
-app.get('/posts/new', authorsOnly, newPost);
-app.post('/posts', authorsOnly, loadBody, createPost);
+app.get('/r/:id/posts/new', authorsOnly, newPost);
+app.post('/r/:id/posts', authorsOnly, loadBody, createPost);
+
 app.get('/posts/:id', showPost);
 
+//Signup/Out
 app.get('/signup', newUser);
 app.post("/signup", loadBody, createUser);
 app.get('/signin', newSession);
@@ -33,7 +41,9 @@ app.post("/signin", loadBody, createSession);
 app.get("/signout", destroySession);
 
 app.get('/post-comments/:id', postComment);
-
+//This is how the sub should be made
+///subreddit-post/<%= sub.id %>
+app.get('/r/:id', postHomepage);
 
 app.post("/post-comments/:id/comments", loadBody, createComment);
 

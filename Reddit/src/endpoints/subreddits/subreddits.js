@@ -1,6 +1,4 @@
-const db = require('../database');
-//const templates = require('../templates');
-//const db = require('../static/box-locations');
+const db = require('../../database');
 
 //console.log("Test 1");
 function subreddits(req, res) {
