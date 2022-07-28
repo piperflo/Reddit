@@ -46,9 +46,9 @@ body {
   
   header {
     min-width: 450px;
-    max-width: 700px;
     text-align: right;
     color: white;
+    width: 100%;
   }
   
   header a, header a:hover {
@@ -62,5 +62,8 @@ body {
   #header{
     flex: 100%;
     background-color: blue;
+    height: 30px;
+    width: 100%;
+    border: 1px solid #4CAF50;
   }
 

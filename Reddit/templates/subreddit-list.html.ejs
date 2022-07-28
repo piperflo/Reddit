@@ -1,14 +1,14 @@
 <nav>
     <ul>
     <% subreddits.forEach(function(sub){ %>
-      <li>
-          <div class="sub-container">
-              <div>
-                  <a class="subs" href="/r/<%= sub.id %>">
-                      <%= sub.name %>
-                  </a>
-              </div>
-          </div>
+        <li>
+            <div class="sub-container">
+                <a class="subs" href="/r/<%= sub.id %>">
+                    <div class="r/subs">
+                        <%= sub.name %>
+                    </div>
+                </a>
+            </div>
     <% }); %>
     </ul>
   </nav>
