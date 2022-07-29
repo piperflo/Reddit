@@ -10,28 +10,29 @@ function deletePost(req, res){
 
     var id = parseInt(req.params.id, 10);
 
+
     var reddit = db.prepare("SELECT * FROM posts WHERE title = ?").get(post);
     post = sanitizeHTML(post);
     //var id = reddit.id;
-    if(!reddit) return failure(req, res, `The post "${post}" cannot be found.`, id);
-    
-    
-    console.log(post);
-    console.log(id);
-    //var info = db.prepare(`INSERT INTO subbreddits (text, posts_id) VALUES (?, ?)`).run(Subbreddit, id);
-    var posts = db.prepare(`DELETE FROM posts 
-                            WHERE title = ?`).run(post);
+    console.log(reddit);
 
     var comms = db.prepare("SELECT * FROM comments WHERE posts_id = ?").get(id);
     
     if(comms != "" || comms != NULL){
         var comments = db.prepare(`DELETE FROM comments WHERE posts_id = ?`).run(id);
-        //Deletes if there are no chages
+        //Deletes if there are no changes/ 
+        //Commented out because we don't know if the post has comments in the first place
         //if(comments.changes == 0) return serveError(req, res, 500, "Unable to Delete database");
     }
+    if(!reddit) return failure(req, res, `The post "${post}" cannot be found.`, id);
     
+    var posts = db.prepare(`DELETE FROM posts 
+                            WHERE title = ?`).run(post);
+
     if(posts.changes !== 1) return serveError(req, res, 500, "Unable to Delete database");
 
+    
+    
     res.statusCode = 302;
     res.setHeader("Location", `/r/${id}`);
     res.end();
