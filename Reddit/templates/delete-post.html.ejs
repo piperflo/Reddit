@@ -1,0 +1,24 @@
+<!doctype HTML>
+<html>
+    <head>
+        <link type="text/css" rel="stylesheet" href="/reddit.css">
+    </head>
+    <body>
+    <div>
+        <form method="POST" action="/r/<%= subs.id %>/delete-posts/delete">   
+            <h4>Delete a post</h4>
+            <div class="error-message">
+                <%= errorMessage %>
+            </div>
+            <input type="text" name="post" required/>
+            <input type="submit" value="post"/>
+        </form>                                                                                   
+        <ul>
+        <% posts.forEach((post) => { %>
+            <li>
+            <%= post.title %>
+        <% }); %>
+        </ul>
+
+    </div>
+</body>

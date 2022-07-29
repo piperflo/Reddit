@@ -6,6 +6,9 @@
     <body>
     <div>
         <h1>Please Pick a user to become a admin</h1>
+        <div class="error-message">
+            <%= errorMessage %>
+        </div>
         <form method="POST" action="/create-admin/create">   
             <input type="text" name="username" required/>
             <input type="submit" value="username"/>

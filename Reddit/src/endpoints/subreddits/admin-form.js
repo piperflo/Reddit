@@ -8,7 +8,8 @@ const templates = require('../../templates');
 function adminForm(req, res) {
     var users = db.prepare(`SELECT * FROM users`).all();
     var obj = {
-        users,users
+        users:users,
+        errorMessage: ""
     }
     var html = templates['create-admin.html'](obj);
     res.setHeader('Content-Type', "text/html");
