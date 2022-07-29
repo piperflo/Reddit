@@ -9,6 +9,7 @@ function newPost(req, res) {
     const id = parseInt(req.params.id, 10);
     var subs = db.prepare(`SELECT * FROM subreddits 
                             WHERE id= ?`).get(id);
+    //var change = db.prepare("UPDATE votes SET votes = 0 WHERE post_id = ?").run(id);
     var form = templates["new-post.html"]({sub: subs});
     var html = templates["layout.html"]({
       sub: subs,

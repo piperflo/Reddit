@@ -24,18 +24,24 @@ const subPost = require('./endpoints/subreddits/show-subreddit');
 const postHomepage = require('./endpoints/subreddits/subreddit-to-post');
 
 const createSub = require('./endpoints/subreddits/create-subreddits');
-const subForm = require('./endpoints/subreddits/create-admin');
+const deleteSub = require('./endpoints/subreddits/delete-subreddit');
+const delForm = require('./endpoints/subreddits/delete-subreddit-form');
+const subForm = require('./endpoints/subreddits/subreddit-form');
 
 const adminsOnly = require('./middleware/admins-only');
 
 const adminForm = require('./endpoints/subreddits/admin-form');
 const createAdmin = require('./endpoints/subreddits/create-admin');
+
+const upvote = require('./endpoints/posts/upvote');
+
 var app = express();
 
 app.use(loadSession);
 
 app.get('/', subPost);
 
+//Posts
 app.get('/r/:id/posts/new', authorsOnly, newPost);
 app.post('/r/posts/:id/post', authorsOnly, loadBody, createPost);
 
@@ -56,12 +62,23 @@ app.get('/r/:id', postHomepage);
 app.post("/post-comments/:id/comments", loadBody, createComment);
 
 app.get("/create-subreddit", adminsOnly, subForm);
-//Added t
-app.post("/create-subreddit/create", authorsOnly, loadBody, createSub);
+app.get("/delete-subreddit", adminsOnly, delForm);
+//A/create-subreddit//delete-subreddit
+app.post("/create-subreddit/create", adminsOnly, loadBody, createSub);
+app.post("/delete-subreddit/delete", adminsOnly, loadBody, deleteSub);
 
 app.get("/create-admin", adminForm);
 
 app.post("/create-admin/create", adminsOnly, loadBody, createAdmin);
+
+app.post("/post-comments/:id/vote", loadBody, upvote);
+//Comments
+
+//Subreddits
+
+//admin stuff
+
+
 
 
 app.get('/rss', serveFeed);

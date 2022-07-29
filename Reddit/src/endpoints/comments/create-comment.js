@@ -4,20 +4,21 @@ const serveError = require('../serve-error');
 //const loadBody = require('../middleware/load-body');
 
 function createComment(req, res){
-  var comment = req.body.comment;
+    var comment = req.body.comment;
 
-  var id = parseInt(req.params.id, 10);
+    var id = parseInt(req.params.id, 10);
 
-  comment = sanitizeHTML(comment);
-
-  var info = db.prepare(`INSERT INTO comments (text, posts_id) VALUES (?, ?)`).run(comment, id);
+    comment = sanitizeHTML(comment);
+    var votes = 0;
+    var info = db.prepare(`INSERT INTO comments (text, posts_id) VALUES (?, ?)`).run(comment, id);
+    db.prepare("INSERT INTO votes (votes, post_id) VALUES ( ?, ?)").run(votes, id);
   
-  if(info.changes !== 1) return serveError(req, res, 500, "Unable to write to database");
-  
+    if(info.changes !== 1) return serveError(req, res, 500, "Unable to write to database");
+    
 
-  res.statusCode = 302;
-  res.setHeader("Location", `/post-comments/${id}`);
-  res.end();
+    res.statusCode = 302;
+    res.setHeader("Location", `/post-comments/${id}`);
+    res.end();
 }
 
 module.exports = createComment;
