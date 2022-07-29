@@ -10,7 +10,7 @@
         <% if(locals.user) { %>
           <% if(locals.user.role === "Author") { %>
             <% if(locals.user.auth === "Admin") { %>
-              <a href="/"><button type="button">Home Page</button></a>
+              
             <% } %>
           <% } %>
             <a href="/signout"><button type="button">Sign Out</button></a>
@@ -19,6 +19,7 @@
             
             <a href="/signup"><button type="button">Sign Up</button></a>
         <% } %>
+        <a href="/"><button type="button">Home Page</button></a>
         </div>
     </header>
     <h1><%= sub.name %></h1>
@@ -27,7 +28,10 @@
             Welcome <%= user.username %>!
             <% if(locals.user.role === "Author") { %>
             <a href="/r/<%= sub.id %>/posts/new">Create a Post</a>
-            <a href="/r/<%= sub.id %>/posts/delete">Delete a Post</a>
+            <% if(locals.user.auth === "Admin") { %>
+              <a href="/r/<%= sub.id %>/posts/delete">Delete a Post</a>
+            <% } %>
+            
             <% } %>
         <% } %>
     </div>

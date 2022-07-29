@@ -109,16 +109,6 @@ body {
 a{
   color: black
 }
-/*
-  #header{
-    flex: 100%;
-    background-color: white;
-    height: 30px;
-    width: 100%;
-    border: 1px solid #4CAF50;
-    color: black
-  }
-*/
 
   button{
     border: 1px solid black;
