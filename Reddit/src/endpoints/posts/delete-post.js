@@ -25,13 +25,11 @@ function deletePost(req, res){
 
     var comms = db.prepare("SELECT * FROM comments WHERE posts_id = ?").get(id);
     
-    /*
     if(comms != "" || comms != NULL){
-        var comments = db.prepare(`DELETE FROM comments 
-        WHERE posts_id = ?`).run(id);
-        if(comments.changes !== 1) return serveError(req, res, 500, "Unable to Delete database");
+        var comments = db.prepare(`DELETE FROM comments WHERE posts_id = ?`).run(id);
+        if(comments.changes == 0) return serveError(req, res, 500, "Unable to Delete database");
     }
-    */
+    
     if(posts.changes !== 1) return serveError(req, res, 500, "Unable to Delete database");
 
     res.statusCode = 302;

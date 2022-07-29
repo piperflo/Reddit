@@ -10,9 +10,12 @@ function createSub(req, res) {
 
     var date = new Date().valueOf();
 
+    var creator = req.session.user.username;
+
+    console.log("This is the user:" + creator);
     sub = sanitizeHTML(sub);
   
-    var info = db.prepare(`INSERT INTO subreddits (name, date) VALUES (?, ?)`).run(sub, date);
+    var info = db.prepare(`INSERT INTO subreddits (name, date, creator) VALUES (?, ?, ?)`).run(sub, date, creator);
     
     if(info.changes !== 1) return serveError(req, res, 500, "Unable to write to database");
     
