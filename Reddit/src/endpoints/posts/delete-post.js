@@ -1,7 +1,6 @@
 const sanitizeHTML = require('sanitize-html');
 const db = require('../database');
 const serveError = require('../serve-error');
-//const loadBody = require('../middleware/load-body');
 const templates = require('../../templates');
 
 function deletePost(req, res){
@@ -27,7 +26,8 @@ function deletePost(req, res){
     
     if(comms != "" || comms != NULL){
         var comments = db.prepare(`DELETE FROM comments WHERE posts_id = ?`).run(id);
-        if(comments.changes == 0) return serveError(req, res, 500, "Unable to Delete database");
+        //Deletes if there are no chages
+        //if(comments.changes == 0) return serveError(req, res, 500, "Unable to Delete database");
     }
     
     if(posts.changes !== 1) return serveError(req, res, 500, "Unable to Delete database");

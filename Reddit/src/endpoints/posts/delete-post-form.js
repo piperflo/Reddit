@@ -1,6 +1,4 @@
-const sanitizeHTML = require('sanitize-html');
 const db = require('../database');
-const serveError = require('../serve-error');
 const templates = require('../../templates');
 
 

@@ -1,8 +1,5 @@
-
-const bcrypt = require('bcrypt');
 const db = require('../../database');
 const serveError = require('../../serve-error');
-const sanitizeHTML = require('sanitize-html');
 const templates = require('../../templates');
 
 function createAdmin(req, res) {
