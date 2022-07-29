@@ -12,7 +12,7 @@ function createSub(req, res) {
 
     var creator = req.session.user.username;
 
-    console.log("This is the user:" + creator);
+    //console.log("This is the user:" + creator);
     sub = sanitizeHTML(sub);
   
     var info = db.prepare(`INSERT INTO subreddits (name, date, creator) VALUES (?, ?, ?)`).run(sub, date, creator);
